@@ -1,0 +1,4 @@
+# the web app is index.html + the model files; the course notebook stays local
+*.ipynb
+checkpoint
+.ipynb_checkpoints/
