@@ -197,7 +197,7 @@
 
 const ORT_VERSION = "1.23.2";   // the same ONNX Runtime release used to verify check_expected.json
 const ORT_DIST    = "https://cdn.jsdelivr.net/npm/onnxruntime-web@" + ORT_VERSION + "/dist/";
-const ORT_SCRIPT  = ORT_DIST + "ort.wasm.min.js";   // wasm-only bundle: 12 MB wasm instead of the 24 MB jsep one
+const ORT_SCRIPT  = ORT_DIST + "ort.wasm.min.js";   // wasm-only build: pulls the 11.4 MB ort-wasm-simd-threaded.wasm, not the 22.7 MB .jsep one
 const QR_SCRIPT   = "https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js";
 
 // Final public GitHub Pages address of this page — this is what the QR code encodes.
@@ -670,7 +670,8 @@ async function boot() {
     setStatus(el.dotOrt, el.msgOrt, "ONNX Runtime Web " + v + " ready (WebAssembly, 1 thread).", "ok");
   } catch (err) {
     setStatus(el.dotOrt, el.msgOrt,
-      "ONNX Runtime failed to start: " + err.message + ". In Safari this needs iOS 16.4+ (WebAssembly SIMD).", "bad");
+      "ONNX Runtime failed to start: " + err.message +
+      ". This build needs WebAssembly SIMD — onnxruntime-web 1.23.2 ships only ort-wasm-simd-*.wasm. Photo mode still works.", "bad");
     return;
   }
 
